@@ -65,7 +65,7 @@ const Navbar = () => {
 
       return (
             <div className="bg-[#244034]">
-                  <div className="navbar max-w-7xl mx-auto py-3">
+                  <div className="navbar max-w-7xl mx-auto py-5">
                         <div className="navbar-start">
                               <div className="dropdown">
                                     <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -87,6 +87,8 @@ const Navbar = () => {
                               <button className="bg-[#D2F34C] text-[#244034] px-8 hover:bg-transparent hover:text-[#D2F34C] hover:border-2 hover:border-[#D2F34C] py-2 rounded-full text-xl font-medium hidden md:block" onClick={() => document.getElementById('my_modal_4').showModal()}>Login</button>
                               <dialog id="my_modal_4" className="modal">
                                     <div className="modal-box w-11/12 max-w-3xl">
+
+                                          {/* Login */}
                                           <Login></Login>
                                           <div className="modal-action">
                                                 <form method="dialog">

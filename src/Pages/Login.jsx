@@ -1,11 +1,46 @@
 import { Link } from "react-router-dom";
 import SocialLogin from "./Home/SocialLogin";
+import useAuth from "../Hooks/useAuth";
+import toast from "react-hot-toast";
 
 const Login = () => {
+
+      const { login } = useAuth();
+
+
+      const handleLogin = (e) => {
+            e.preventDefault();
+
+            const form = e.target;
+            const email = form.email.value;
+            const password = form.password.value;
+
+            // validation
+            if (password.length < 6) {
+                  return toast.error("Password should have at least 6 characters.");
+            }
+            else if (!/[A-Z]/.test(password)) {
+                  return toast.error("Password should contain at least one uppercase letter.");
+            }
+            else if (!/[@$!%*?&]/.test(password)) {
+                  return toast.error("Password should contain at least one special character from @$!%*?&.");
+            }
+
+            login(email, password)
+                  .then(res => {
+                        toast.success('You Successfully Logged In')
+                        window.location.reload();
+                  })
+                  .catch(error => {
+                        toast.error(error.message);
+                  })
+      }
+
+
       return (
 
             <div className="w-full  mx-auto p-4 dark:bg-gray-800 dark:border-gray-700">
-                  <form className="space-y-6" action="#">
+                  <form className="space-y-6 mb-5" onSubmit={handleLogin}>
                         <h5 style={{ fontFamily: 'Playpen Sans' }} className="text-6xl font-medium text-center text-[#244034] dark:text-white">Hi, Welcome Back!</h5>
                         <div className="text-lg text-center font-medium text-gray-500 dark:text-gray-300">
                               Do not have an account? <Link reloadDocument to="/register" className="text-[#244034] hover:no-underline underline dark:text-blue-500">Create account</Link>
@@ -21,9 +56,8 @@ const Login = () => {
 
                         <button type="submit" className="w-full text-white bg-[#244034] hover:bg-emerald-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Login to your account</button>
 
-                        <SocialLogin></SocialLogin>
-
                   </form>
+                  <SocialLogin></SocialLogin>
             </div>
 
       );

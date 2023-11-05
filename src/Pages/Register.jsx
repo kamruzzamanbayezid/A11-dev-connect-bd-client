@@ -16,6 +16,17 @@ const Register = () => {
             const password = form.password.value;
             const photo = form.photo.value;
 
+            // validation
+            if (password.length < 6) {
+                  return toast.error("Password should have at least 6 characters.");
+            }
+            else if (!/[A-Z]/.test(password)) {
+                  return toast.error("Password should contain at least one uppercase letter.");
+            }
+            else if (!/[@$!%*?&]/.test(password)) {
+                  return toast.error("Password should contain at least one special character from @$!%*?&.");
+            }
+
             createUser(email, password)
                   .then(res => {
 
@@ -23,6 +34,7 @@ const Register = () => {
                         profileUpdate(name, photo)
                               .then(() => {
                                     toast.success('user Created Successfully')
+                                    window.location.reload();
                               })
                               .catch(error => {
                                     toast.error(error.message);
@@ -30,7 +42,7 @@ const Register = () => {
 
                   })
                   .catch(error => {
-                        console.log(error);
+                        toast.error(error.message);
                   })
       }
 

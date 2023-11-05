@@ -11,9 +11,11 @@ const SocialLogin = () => {
             googleLogin()
                   .then(() => {
                         toast.success('You Successfully Logged In')
+                        window.location.reload();
                   })
                   .catch(error => {
                         toast.error(error.message)
+                        console.log(error);
                   })
       }
 

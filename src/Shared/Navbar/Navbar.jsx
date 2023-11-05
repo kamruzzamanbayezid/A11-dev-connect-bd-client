@@ -1,8 +1,22 @@
 import { Link, NavLink } from "react-router-dom";
 import './Navbar.css'
 import Login from "../../Pages/Login";
+import useAuth from "../../Hooks/useAuth";
+import toast from "react-hot-toast";
 
 const Navbar = () => {
+
+      const { user, logOut } = useAuth();
+
+      const handleLogOut = () => {
+            logOut()
+                  .then(() => {
+                        toast.success('You Successfully Logged Out')
+                  })
+                  .catch(error => {
+                        toast.error(error.message)
+                  })
+      }
 
       const NavLinks = <>
 
@@ -48,20 +62,49 @@ const Navbar = () => {
                         Blogs
                   </NavLink>
             </li>
-            <li onClick={() => document.getElementById('my_modal_4').showModal()} className="text-lg font-normal flex md:hidden">
-                  <NavLink style={({ isActive }) => ({
-                        color: '#244034',
-                        backgroundColor: '#D2F34C',
-                        width: '100%',
-                        fontWeight: "bold",
-                        textAlign: "center"
+            {
+                  !user?.email &&
+                  <li className="text-lg font-normal">
+                        <NavLink to="/register" style={({ isActive }) => ({
+                              color: isActive ? '#D2F34C' : '#FFF'
+                        })}>
+                              Register
+                        </NavLink>
+                  </li>
+            }
+            {
+                  user?.email ?
+                        <li onClick={handleLogOut} className="text-lg font-normal flex md:hidden">
+                              <NavLink style={({ isActive }) => ({
+                                    color: '#244034',
+                                    backgroundColor: '#D2F34C',
+                                    width: '100%',
+                                    fontWeight: "bold",
+                                    textAlign: "center"
 
-                  })}>
-                        Login
-                  </NavLink>
-            </li>
+                              })}>
+                                    Log out
+                              </NavLink>
+                        </li>
+                        :
+                        <li onClick={() => document.getElementById('my_modal_4').showModal()} className="text-lg font-normal flex md:hidden">
+                              <NavLink style={({ isActive }) => ({
+                                    color: '#244034',
+                                    backgroundColor: '#D2F34C',
+                                    width: '100%',
+                                    fontWeight: "bold",
+                                    textAlign: "center"
+
+                              })}>
+                                    Login
+                              </NavLink>
+                        </li>
+
+            }
+
 
       </>
+
 
       return (
             <div className="bg-[#244034]">
@@ -84,7 +127,12 @@ const Navbar = () => {
                         </div>
                         <div className="navbar-end">
 
-                              <button className="bg-[#D2F34C] text-[#244034] px-8 hover:bg-transparent hover:text-[#D2F34C] hover:border-2 hover:border-[#D2F34C] py-2 rounded-full text-xl font-medium hidden md:block" onClick={() => document.getElementById('my_modal_4').showModal()}>Login</button>
+                              {
+                                    user?.email ?
+                                          <button onClick={handleLogOut} className="bg-[#D2F34C] text-[#244034] px-8 hover:bg-transparent hover:text-[#D2F34C] hover:border-2 hover:border-[#D2F34C] py-2 rounded-full text-xl font-medium hidden md:block">Log out</button>
+                                          :
+                                          <button className="bg-[#D2F34C] text-[#244034] px-8 hover:bg-transparent hover:text-[#D2F34C] hover:border-2 hover:border-[#D2F34C] py-2 rounded-full text-xl font-medium hidden md:block" onClick={() => document.getElementById('my_modal_4').showModal()}>Login</button>
+                              }
                               <dialog id="my_modal_4" className="modal">
                                     <div className="modal-box w-11/12 max-w-3xl">
 
@@ -99,11 +147,14 @@ const Navbar = () => {
                                     </div>
 
                               </dialog>
-                              <div className="avatar ml-1">
-                                    <div className="w-14 rounded-full">
-                                          <img src="https://i.ibb.co/Fn6mVw3/user.png" />
+                              {
+                                    user?.email &&
+                                    <div className="avatar ml-1">
+                                          <div className="w-14 rounded-full">
+                                                <img src={user?.photoURL} />
+                                          </div>
                                     </div>
-                              </div>
+                              }
                         </div>
                   </div>
             </div>

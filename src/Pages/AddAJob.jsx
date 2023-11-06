@@ -117,10 +117,10 @@ const AddAJob = () => {
                                     </div>
                                     <select name="jobCategory" value={jobCategory} onChange={(e) => { setJobCategory(e.target.value) }}>
                                           <option value="">Select Job Category</option>
-                                          <option value="On Site Job">On Site Job</option>
-                                          <option value="Remote Job">Remote Job</option>
+                                          <option value="OnSiteJob">On Site Job</option>
+                                          <option value="RemoteJob">Remote Job</option>
                                           <option value="Hybrid">Hybrid</option>
-                                          <option value="Part Time">Part Time</option>
+                                          <option value="PartTime">Part Time</option>
                                     </select>
                               </div>
 

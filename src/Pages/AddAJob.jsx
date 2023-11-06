@@ -14,6 +14,7 @@ const AddAJob = () => {
       const [jobCategory, setJobCategory] = useState('');
       const [title, setTitle] = useState('');
       const [image, setImage] = useState('');
+      const [logo, setLogo] = useState('');
       const [salaryRange, setSalaryRange] = useState('');
       const [postingDate, setPostingDate] = useState('');
       const [deadline, setDeadline] = useState('');
@@ -38,6 +39,7 @@ const AddAJob = () => {
                   title,
                   userName,
                   image,
+                  logo,
                   salaryRange,
                   postingDate,
                   deadline,
@@ -110,10 +112,10 @@ const AddAJob = () => {
 
 
                                     <div>
-                                          <label htmlFor="visitors" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Photo URL</label>
+                                          <label htmlFor="url" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Photo URL</label>
                                           <input name="image"
                                                 value={image}
-                                                onChange={(e) => setImage(e.target.value)} type="photo_URL" id="visitors" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Photo URL" required />
+                                                onChange={(e) => setImage(e.target.value)} type="photo_URL" id="url" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Photo URL" required />
                                     </div>
                                     <select name="jobCategory" value={jobCategory} onChange={(e) => { setJobCategory(e.target.value) }}>
                                           <option value="">Select Job Category</option>
@@ -124,7 +126,14 @@ const AddAJob = () => {
                                     </select>
                               </div>
 
-                              <div className="mb-6">
+                              <div>
+                                    <label htmlFor="logo" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Company Logo</label>
+                                    <input name="logo"
+                                          value={logo}
+                                          onChange={(e) => setLogo(e.target.value)} type="photo_URL" id="logo" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="company logo" required />
+                              </div>
+
+                              <div className="my-6">
                                     <label htmlFor="sort_des" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Sort Description</label>
                                     <textarea name="description"
                                           value={description}

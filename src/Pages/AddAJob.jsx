@@ -1,10 +1,14 @@
 import { useState } from "react";
 import useAuth from "../Hooks/useAuth";
+import useAxios from "../Hooks/useAxios";
+import Swal from "sweetalert2";
+// import axios from "axios";
 
 const AddAJob = () => {
 
       const { user } = useAuth();
       const userName = user?.displayName;
+      const axios = useAxios();
 
       // const [UserName, setUserName] = useState('');
       const [jobCategory, setJobCategory] = useState('');
@@ -12,7 +16,7 @@ const AddAJob = () => {
       const [image, setImage] = useState('');
       const [salaryRange, setSalaryRange] = useState('');
       const [postingDate, setPostingDate] = useState('');
-      const [deadline, setDeadline] = useState(0);
+      const [deadline, setDeadline] = useState('');
       const [applicantsNumber, setApplicantsNumber] = useState(0);
       const [description, setDescription] = useState('');
 
@@ -28,6 +32,7 @@ const AddAJob = () => {
 
       const handleAddJob = e => {
             e.preventDefault();
+
             const formData = {
                   jobCategory,
                   title,
@@ -40,14 +45,17 @@ const AddAJob = () => {
                   description,
             };
 
-            console.log(formData);
-            fetch('http://localhost:5000/api/v1/allJobs', {
-                  method: 'POST',
-                  'Content-Type': 'application/json',
-                  body: JSON.stringify(formData)
-            })
-                  .then(res => res.json())
-                  .then(data => console.log(data.data))
+            // add a job
+            axios.post('/allJobs', formData)
+                  .then(data => {
+                        if (data.data.insertedId) {
+                              Swal.fire({
+                                    title: "Good job!",
+                                    text: "Successfully added the job!",
+                                    icon: "success"
+                              });
+                        }
+                  })
       };
 
       return (
@@ -117,10 +125,10 @@ const AddAJob = () => {
                               </div>
 
                               <div className="mb-6">
-                                    <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Sort Description</label>
+                                    <label htmlFor="sort_des" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Sort Description</label>
                                     <textarea name="description"
                                           value={description}
-                                          onChange={(e) => setDescription(e.target.value)} rows="3" type="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Short Description" required />
+                                          onChange={(e) => setDescription(e.target.value)} rows="3" type="text" id="sort_des" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Short Description" required />
                               </div>
 
                               <button type="submit" className="w-full text-white bg-[#244034] hover:bg-emerald-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add a job</button>

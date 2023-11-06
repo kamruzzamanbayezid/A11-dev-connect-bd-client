@@ -42,10 +42,10 @@ const Navbar = () => {
                   </NavLink>
             </li>
             <li className="text-lg font-normal">
-                  <NavLink to="/addAJobs" style={({ isActive }) => ({
+                  <NavLink to="/addAJob" style={({ isActive }) => ({
                         color: isActive ? '#D2F34C' : '#FFF'
                   })}>
-                        Add a Jobs
+                        Add a Job
                   </NavLink>
             </li>
             <li className="text-lg font-normal">

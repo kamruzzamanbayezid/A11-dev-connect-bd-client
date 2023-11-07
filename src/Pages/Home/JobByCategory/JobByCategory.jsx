@@ -54,12 +54,12 @@ const JobByCategory = () => {
                               <TabPanel>
                                     {
                                           allJobs?.map((job) => (
-                                                <div key={job._id} className='hover:shadow-md p-4  bg-[#FFF] my-6 flex flex-col md:flex-row justify-between items-center'>
+                                                <div key={job._id} className='hover:shadow-md p-4 rounded-lg bg-[#FFF] my-6 flex flex-col md:flex-row justify-between items-center'>
                                                       <div className='flex flex-col md:flex-row  gap-6'>
                                                             <div className='flex items-center justify-center'>
                                                                   <img className='w-full md:w-40 h-32 md:h-full' src={job?.logo} alt="" />
                                                             </div>
-                                                            <div className='space-y-5 py-6'>
+                                                            <div className='space-y-5 '>
                                                                   <div className=''>
                                                                         <p className='text-center md:text-start text-sm mb-1 text-[#AAB1B7] '>Posted by: {job?.userName}</p>
                                                                         <p className='text-3xl text-center md:text-start mb-3 text-[#244034]'>{job?.title}</p>
@@ -90,12 +90,12 @@ const JobByCategory = () => {
                               <TabPanel>
                                     {
                                           jobByCategory?.map((job) => (
-                                                <div key={job._id} className='hover:shadow-md p-4  bg-[#FFF] my-6 flex flex-col md:flex-row justify-between items-center'>
+                                                <div key={job._id} className='hover:shadow-md p-4 rounded-lg bg-[#FFF] my-6 flex flex-col md:flex-row justify-between items-center'>
                                                       <div className='flex flex-col md:flex-row  gap-6'>
                                                             <div className='flex items-center justify-center'>
                                                                   <img className='w-full md:w-40 h-32 md:h-full' src={job?.logo} alt="" />
                                                             </div>
-                                                            <div className='space-y-5 py-6'>
+                                                            <div className='space-y-5 '>
                                                                   <div className=''>
                                                                         <p className='text-center md:text-start text-sm mb-1 text-[#AAB1B7] '>Posted by: {job?.userName}</p>
                                                                         <p className='text-3xl text-center md:text-start mb-3 text-[#244034]'>{job?.title}</p>
@@ -126,12 +126,12 @@ const JobByCategory = () => {
                               <TabPanel>
                                     {
                                           jobByCategory?.map((job) => (
-                                                <div key={job._id} className='hover:shadow-md p-4  bg-[#FFF] my-6 flex flex-col md:flex-row justify-between items-center'>
+                                                <div key={job._id} className='hover:shadow-md p-4 rounded-lg bg-[#FFF] my-6 flex flex-col md:flex-row justify-between items-center'>
                                                       <div className='flex flex-col md:flex-row  gap-6'>
                                                             <div className='flex items-center justify-center'>
                                                                   <img className='w-full md:w-40 h-32 md:h-full' src={job?.logo} alt="" />
                                                             </div>
-                                                            <div className='space-y-5 py-6'>
+                                                            <div className='space-y-5 '>
                                                                   <div className=''>
                                                                         <p className='text-center md:text-start text-sm mb-1 text-[#AAB1B7] '>Posted by: {job?.userName}</p>
                                                                         <p className='text-3xl text-center md:text-start mb-3 text-[#244034]'>{job?.title}</p>
@@ -162,12 +162,12 @@ const JobByCategory = () => {
                               <TabPanel>
                                     {
                                           jobByCategory?.map((job) => (
-                                                <div key={job._id} className='hover:shadow-md p-4  bg-[#FFF] my-6 flex flex-col md:flex-row justify-between items-center'>
+                                                <div key={job._id} className='hover:shadow-md p-4 rounded-lg bg-[#FFF] my-6 flex flex-col md:flex-row justify-between items-center'>
                                                       <div className='flex flex-col md:flex-row  gap-6'>
                                                             <div className='flex items-center justify-center'>
                                                                   <img className='w-full md:w-40 h-32 md:h-full' src={job?.logo} alt="" />
                                                             </div>
-                                                            <div className='space-y-5 py-6'>
+                                                            <div className='space-y-5 '>
                                                                   <div className=''>
                                                                         <p className='text-center md:text-start text-sm mb-1 text-[#AAB1B7] '>Posted by: {job?.userName}</p>
                                                                         <p className='text-3xl text-center md:text-start mb-3 text-[#244034]'>{job?.title}</p>
@@ -198,12 +198,12 @@ const JobByCategory = () => {
                               <TabPanel>
                                     {
                                           jobByCategory?.map((job) => (
-                                                <div key={job._id} className='hover:shadow-md p-4  bg-[#FFF] my-6 flex flex-col md:flex-row justify-between items-center'>
+                                                <div key={job._id} className='hover:shadow-md p-4 rounded-lg bg-[#FFF] my-6 flex flex-col md:flex-row justify-between items-center'>
                                                       <div className='flex flex-col md:flex-row  gap-6'>
                                                             <div className='flex items-center justify-center'>
                                                                   <img className='w-full md:w-40 h-32 md:h-full' src={job?.logo} alt="" />
                                                             </div>
-                                                            <div className='space-y-5 py-6'>
+                                                            <div className='space-y-5 '>
                                                                   <div className=''>
                                                                         <p className='text-center md:text-start text-sm mb-1 text-[#AAB1B7] '>Posted by: {job?.userName}</p>
                                                                         <p className='text-3xl text-center md:text-start mb-3 text-[#244034]'>{job?.title}</p>

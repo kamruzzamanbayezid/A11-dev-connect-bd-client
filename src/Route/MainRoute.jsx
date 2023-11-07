@@ -5,7 +5,11 @@ import Register from "../Pages/Register";
 import ErrorPage from "../Pages/ErrorPage";
 import AddAJob from "../Pages/AddAJob";
 import AllJobs from "../Pages/AllJobs";
+import JobDetails from "../Pages/jobDetails";
+import useAxios from "../Hooks/useAxios";
 
+
+const axios = useAxios();
 
 const router = createBrowserRouter([
       {
@@ -21,13 +25,17 @@ const router = createBrowserRouter([
                         path: 'register',
                         element: <Register></Register>
                   },
-                  { 
+                  {
                         path: 'addAJob',
                         element: <AddAJob></AddAJob>
                   },
-                  { 
+                  {
                         path: 'allJobs',
                         element: <AllJobs></AllJobs>
+                  },
+                  {
+                        path: 'allJobs/jobDetails/:id',
+                        element: <JobDetails></JobDetails>, 
                   }
             ]
       }

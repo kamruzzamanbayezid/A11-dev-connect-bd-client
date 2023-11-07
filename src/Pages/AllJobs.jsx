@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import useAxios from "../Hooks/useAxios";
+import { Link } from "react-router-dom";
 
 const AllJobs = () => {
 
@@ -37,7 +38,7 @@ const AllJobs = () => {
             <div className="bg-[#F5F7FA] pt-10 pb-20">
                   <h5 style={{ fontFamily: 'Playpen Sans' }} className="text-6xl pt-6 mb-7 font-medium text-center text-[#244034] dark:text-white">All Jobs</h5>
 
-                  <div className="flex justify-center">
+                  <div className="flex justify-center px-4">
 
                         <input onChange={(e) => setInputValue(e.target.value)} className='rounded-l-lg lg:w-1/2 w-full h-14 text-[#0b0b0b66] bg-[#FFF] border border-solid border-[#DEDEDE] pl-4' type="text" placeholder="Search by job title...." />
 
@@ -72,7 +73,9 @@ const AllJobs = () => {
                                                       <p className=' text-[#AAB1B7] mr-3 mt-1'>Deadline: {job?.deadline}</p>
                                                 </div>
 
-                                                <button className=" text-[#D2F34C] bg-[#244034] px-8 py-2 rounded hover:bg-transparent hover:border hover:border-[#244034] hover:text-[#244034] text-xl font-medium ">View Details</button>
+                                                <Link to={`jobDetails/${job._id}`}>
+                                                      <button className=" text-[#D2F34C] bg-[#244034] px-8 py-2 rounded hover:bg-transparent hover:border hover:border-[#244034] hover:text-[#244034] text-xl font-medium ">View Details</button>
+                                                </Link>
                                           </div>
                                     </div>
                               ))
@@ -102,7 +105,9 @@ const AllJobs = () => {
                                                       <p className=' text-[#AAB1B7] mr-3 mt-1'>Deadline: {job?.deadline}</p>
                                                 </div>
 
-                                                <button className=" text-[#D2F34C] bg-[#244034] px-8 py-2 rounded hover:bg-transparent hover:border hover:border-[#244034] hover:text-[#244034] text-xl font-medium ">View Details</button>
+                                                <Link to={`jobDetails/${job._id}`}>
+                                                      <button className=" text-[#D2F34C] bg-[#244034] px-8 py-2 rounded hover:bg-transparent hover:border hover:border-[#244034] hover:text-[#244034] text-xl font-medium ">View Details</button>
+                                                </Link>
                                           </div>
                                     </div>
                               ))

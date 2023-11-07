@@ -9,7 +9,8 @@
             "postingDate": "2023-11-01",
             "deadline": "2024-01-01",
             "applicantsNumber": 0,
-            "description": "We are seeking a talented and highly motivated Full Stack Engineer interested in contributing to the development and maintenance of our robust and innovative software solutions. Join our team and make a significant impact in a dynamic and fast-paced environment."
+            "description": "We are seeking a talented and highly motivated Full Stack Engineer interested in contributing to the development and maintenance of our robust and innovative software solutions. Join our team and make a significant impact in a dynamic and fast-paced environment.",
+            "userEmail": "mama@mami.com"
       },
       {
             "jobCategory": "RemoteJob",
@@ -21,7 +22,8 @@
             "postingDate": "2023-11-02",
             "deadline": "2024-01-02",
             "applicantsNumber": 0,
-            "description": "We are in need of a talented Frontend Web Developer to create user-friendly web applications. If you have a passion for crafting elegant and intuitive user interfaces, we welcome you to be a part of our creative team and contribute to the development of cutting-edge web experiences."
+            "description": "We are in need of a talented Frontend Web Developer to create user-friendly web applications. If you have a passion for crafting elegant and intuitive user interfaces, we welcome you to be a part of our creative team and contribute to the development of cutting-edge web experiences.",
+            "userEmail": "mama@mami.com"
       },
       {
             "jobCategory": "OnSiteJob",
@@ -33,7 +35,8 @@
             "postingDate": "2023-11-02",
             "deadline": "2024-01-02",
             "applicantsNumber": 0,
-            "description": "We are seeking a highly skilled and experienced Senior Web Developer with a strong background in designing and implementing web applications. Join our team and take on the challenge of delivering high-quality solutions that meet and exceed client expectations."
+            "description": "We are seeking a highly skilled and experienced Senior Web Developer with a strong background in designing and implementing web applications. Join our team and take on the challenge of delivering high-quality solutions that meet and exceed client expectations.",
+            "userEmail": "mama@mami.com"
       },
       {
             "jobCategory": "OnSiteJob",
@@ -45,7 +48,8 @@
             "postingDate": "2023-11-02",
             "deadline": "2024-01-02",
             "applicantsNumber": 0,
-            "description": "We are seeking an experienced Junior Web Developer to join our dynamic team. If you are passionate about web development and eager to learn and grow in a collaborative environment, this opportunity is perfect for you to kick-start your career."
+            "description": "We are seeking an experienced Junior Web Developer to join our dynamic team. If you are passionate about web development and eager to learn and grow in a collaborative environment, this opportunity is perfect for you to kick-start your career.",
+            "userEmail": "mama@mami.com"
       },
       {
             "jobCategory": "Hybrid",
@@ -57,7 +61,8 @@
             "postingDate": "2023-11-02",
             "deadline": "2024-01-04",
             "applicantsNumber": 0,
-            "description": "We are looking for a Full Stack Web Developer to manage the interchange of data between the server and the users. If you are proficient in both front-end and back-end technologies and enjoy taking ownership of the entire development process, this role is for you."
+            "description": "We are looking for a Full Stack Web Developer to manage the interchange of data between the server and the users. If you are proficient in both front-end and back-end technologies and enjoy taking ownership of the entire development process, this role is for you.",
+            "userEmail": "mama@mami.com"
       },
       {
             "jobCategory": "Hybrid",
@@ -69,7 +74,8 @@
             "postingDate": "2023-11-02",
             "deadline": "2024-01-04",
             "applicantsNumber": 0,
-            "description": "We are seeking a highly experienced and motivated Web Development Manager to lead our web development team. If you have a proven track record of successfully managing complex web projects and are passionate about delivering exceptional user experiences, we welcome your application."
+            "description": "We are seeking a highly experienced and motivated Web Development Manager to lead our web development team. If you have a proven track record of successfully managing complex web projects and are passionate about delivering exceptional user experiences, we welcome your application.",
+            "userEmail": "mama@mami.com"
       },
       {
             "jobCategory": "PartTime",
@@ -81,7 +87,8 @@
             "postingDate": "2022-01-01",
             "deadline": "2023-10-26",
             "applicantsNumber": 0,
-            "description": "We are looking for a skilled Part-Time Web Developer to assist in the development and maintenance of our web applications. If you are passionate about web development and are looking for a flexible work schedule, this role could be the perfect fit for you."
+            "description": "We are looking for a skilled Part-Time Web Developer to assist in the development and maintenance of our web applications. If you are passionate about web development and are looking for a flexible work schedule, this role could be the perfect fit for you.",
+            "userEmail": "mama@mami.com"
       },
       {
             "jobCategory": "PartTime",
@@ -93,6 +100,7 @@
             "postingDate": "2022-01-01",
             "deadline": "2023-10-18",
             "applicantsNumber": 0,
-            "description": "We are offering an exciting opportunity for a Web Development Intern to gain hands-on experience in the field. If you are enthusiastic about learning and are eager to apply your theoretical knowledge to real-world projects, this internship is a great stepping stone for your career in web development."
+            "description": "We are offering an exciting opportunity for a Web Development Intern to gain hands-on experience in the field. If you are enthusiastic about learning and are eager to apply your theoretical knowledge to real-world projects, this internship is a great stepping stone for your career in web development.",
+            "userEmail": "mama@mami.com"
       }
 ]

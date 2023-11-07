@@ -1,49 +1,34 @@
+import { useLoaderData } from "react-router-dom";
 import { useState } from "react";
 import useAuth from "../Hooks/useAuth";
 import useAxios from "../Hooks/useAxios";
 import Swal from "sweetalert2";
-import toast from "react-hot-toast";
-// import axios from "axios";
 
-const AddAJob = () => {
+const UpdateJobs = () => {
 
+      const axios = useAxios();
+      const loadedJob = useLoaderData();
       const { user } = useAuth();
       const userName = user?.displayName;
-      const userEmail = user?.email;
-      console.log(userEmail);
-      const axios = useAxios();
+
+      const [jobCategory, setJobCategory] = useState(loadedJob.jobCategory);
+      const [title, setTitle] = useState(loadedJob.title);
+      const [image, setImage] = useState(loadedJob.image);
+      const [logo, setLogo] = useState(loadedJob.logo);
+      const [salaryRange, setSalaryRange] = useState(loadedJob.salaryRange);
+      const [postingDate, setPostingDate] = useState(loadedJob.postingDate);
+      const [deadline, setDeadline] = useState(loadedJob.deadline);
+      const [applicantsNumber, setApplicantsNumber] = useState(loadedJob.applicantsNumber);
+      const [description, setDescription] = useState(loadedJob.description);
 
 
-      const [jobCategory, setJobCategory] = useState('');
-      const [title, setTitle] = useState('');
-      const [image, setImage] = useState('');
-      const [logo, setLogo] = useState('');
-      const [salaryRange, setSalaryRange] = useState('');
-      const [postingDate, setPostingDate] = useState('');
-      const [deadline, setDeadline] = useState('');
-      const [applicantsNumber, setApplicantsNumber] = useState(0);
-      const [description, setDescription] = useState('');
-
-      const resetForm = () => {
-            setJobCategory('');
-            setTitle('');
-            setImage('');
-            setLogo('');
-            setSalaryRange('');
-            setPostingDate(0);
-            setDescription('');
-            setDeadline('');
-            setApplicantsNumber(0);
-      };
-
-      const handleAddJob = e => {
+      const handleUpdateJobs = e => {
             e.preventDefault();
 
             const formData = {
                   jobCategory,
                   title,
                   userName,
-                  userEmail,
                   image,
                   logo,
                   salaryRange,
@@ -53,31 +38,31 @@ const AddAJob = () => {
                   description,
             };
 
+
             // add a job
-            axios.post('/allJobs', formData)
+            axios.put(`/allJobs/singleJobs/${loadedJob._id}`, formData)
                   .then(data => {
-                        if (data.data.insertedId) {
+                        console.log(data.data);
+                        if (data.data.modifiedCount > 0) {
                               Swal.fire({
                                     title: "Good job!",
-                                    text: "Successfully added the job!",
+                                    text: "Successfully update the job!",
                                     icon: "success"
                               });
-                              resetForm();
                         }
                   })
                   .catch(error => {
-                        toast.error(error.message)
+                        console.log(error.message);
                   })
       };
 
       return (
             <div >
-                  <div className="bg-[#244034] min-h-[35vh]">
-                        <h1 style={{ fontFamily: 'Playpen Sans' }} className="text-center text-5xl pt-7 text-white font-light">Post a Job</h1>
-                        <p className="text-center mt-6 text-slate-200">Get your job posting seen by thousands of job seekers.</p>
+                  <div className="bg-[#244034] min-h-[35vh] flex items-center justify-center">
+                        <h1 style={{ fontFamily: 'Playpen Sans' }} className="text-center text-5xl  text-white font-light">Update Job</h1>
                   </div>
                   <div className="max-w-7xl mx-auto my-10">
-                        <form onSubmit={handleAddJob} className="lg:w-4/5 p-4 mx-auto">
+                        <form onSubmit={handleUpdateJobs} className="lg:w-4/5 p-4 mx-auto">
                               <div className="grid gap-6 mb-6 md:grid-cols-2">
                                     <div>
                                           <label htmlFor="first_name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">User Name</label>
@@ -103,7 +88,8 @@ const AddAJob = () => {
                                           <input type="number"
                                                 name="applicants-number"
                                                 value={applicantsNumber}
-                                                onChange={(e) => setApplicantsNumber(e.target.value)} id="applicants" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="applicants number" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" required />
+                                                onChange={(e) => setApplicantsNumber(e.target.value)}
+                                                readOnly id="applicants" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="applicants number" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" required />
                                     </div>
                                     <div>
                                           <label htmlFor="date" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Posting Date</label>
@@ -150,7 +136,7 @@ const AddAJob = () => {
                                           onChange={(e) => setDescription(e.target.value)} rows="3" type="text" id="sort_des" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Short Description" required />
                               </div>
 
-                              <button type="submit" className="w-full text-white bg-[#244034] hover:bg-emerald-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add a job</button>
+                              <button type="submit" className="w-full text-white bg-[#244034] hover:bg-emerald-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Update</button>
 
 
                         </form>
@@ -160,5 +146,4 @@ const AddAJob = () => {
       );
 };
 
-
-export default AddAJob;
+export default UpdateJobs;

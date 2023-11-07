@@ -6,10 +6,9 @@ import ErrorPage from "../Pages/ErrorPage";
 import AddAJob from "../Pages/AddAJob";
 import AllJobs from "../Pages/AllJobs";
 import JobDetails from "../Pages/jobDetails";
-import useAxios from "../Hooks/useAxios";
+import MyJobs from "../Pages/MyJobs";
+import UpdateJobs from "../Pages/UpdateJobs";
 
-
-const axios = useAxios();
 
 const router = createBrowserRouter([
       {
@@ -34,8 +33,17 @@ const router = createBrowserRouter([
                         element: <AllJobs></AllJobs>
                   },
                   {
-                        path: 'allJobs/jobDetails/:id',
-                        element: <JobDetails></JobDetails>, 
+                        path: 'jobDetails/:id',
+                        element: <JobDetails></JobDetails>,
+                  },
+                  {
+                        path: 'myJobs',
+                        element: <MyJobs></MyJobs>
+                  },
+                  {
+                        path: 'updateJobs/:id',
+                        element: <UpdateJobs></UpdateJobs>,
+                        loader: ({ params }) => fetch(`http://localhost:5000/api/v1/allJobs/singleJobs/${params.id}`)
                   }
             ]
       }

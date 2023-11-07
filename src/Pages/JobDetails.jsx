@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import useAxios from "../Hooks/useAxios";
 import { CiLocationOn } from "react-icons/ci";
+import toast from "react-hot-toast";
 
 
 const JobDetails = () => {
@@ -11,17 +12,16 @@ const JobDetails = () => {
       const [jobDetails, setJobDetails] = useState({});
       const axios = useAxios();
 
-      const { _id, jobCategory, title, userName, image, logo, salaryRange, postingDate, deadline, applicantsNumber, description } = jobDetails || {};
+      const { jobCategory, title, userName, image, logo, salaryRange, postingDate, deadline, applicantsNumber, description } = jobDetails || {};
 
       useEffect(() => {
             axios
-                  .get(`/allJobs/jobDetails/${id}`)
+                  .get(`/allJobs/singleJobs/${id}`)
                   .then((data) => {
                         setJobDetails(data.data);
-                        console.log(data.data);
                   })
                   .catch((error) => {
-                        console.error("Error fetching job details:", error);
+                        toast.error("Error fetching job details:", error);
                   });
       }, [axios, id]);
 
@@ -36,8 +36,6 @@ const JobDetails = () => {
                               />
                         </div>
                         <div className="max-w-7xl mx-auto pb-20 flex flex-col md:flex-row gap-6">
-
-
                               <div className="md:w-2/3">
                                     <div className="p-4  bg-white  rounded-lg shadow">
                                           <div className="flex pb-4 flex-col items-center md:flex-row  dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
@@ -83,15 +81,52 @@ const JobDetails = () => {
 
                                           <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Job Summery
                                           </h5>
-                                          <hr className="my-6"/>
+                                          <hr className="my-6" />
                                           <div>
                                                 <li className="mb-3 text-[#AAB1B7]">Published on: <span className="text-[#001D38]">{postingDate}</span></li>
                                                 <li className="text-[#AAB1B7] mb-3">Deadline: <span className="text-[#001D38]">{deadline}</span></li>
                                                 <li className="text-[#AAB1B7] mb-3">Salary: <span className="text-[#001D38]">{salaryRange}</span></li>
                                                 <li className="text-[#AAB1B7] mb-3">Job nature: <span className="text-[#001D38]">{jobCategory}</span></li>
+                                                <li className="text-[#AAB1B7] mb-3">Applicants: <span className="text-[#001D38]">{applicantsNumber}</span></li>
                                           </div>
 
-                                          <button className="w-full mt-4 text-[#D2F34C] bg-[#244034] px-8 py-2 rounded hover:bg-transparent hover:border hover:border-[#244034] hover:text-[#244034] text-xl font-medium ">Apply now</button>
+                                          <button onClick={() => document.getElementById('apply-modal').showModal()} className="w-full mt-4 text-[#D2F34C] bg-[#244034] px-8 py-2 rounded hover:bg-transparent hover:border hover:border-[#244034] hover:text-[#244034] text-xl font-medium ">Apply now</button>
+
+
+                                          {/* Modal part */}
+                                          <dialog id="apply-modal" className="modal">
+                                                <div className="modal-box w-11/12 max-w-5xl">
+
+
+                                                      <div className="w-full  mx-auto p-4 dark:bg-gray-800 dark:border-gray-700">
+                                                            <form className="space-y-6 mb-5">
+                                                                  <h5 style={{ fontFamily: 'Playpen Sans' }} className="text-6xl font-medium text-center text-[#244034] dark:text-white">Apply for the job</h5>
+
+                                                                  <div>
+                                                                        <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
+                                                                        <input type="email" name="email" id="email" className="bg-gray-50 border border-gray-300 placeholder:text-base text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-2.5 py-6 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="name@company.com" required />
+                                                                  </div>
+                                                                  <div>
+                                                                        <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your password</label>
+                                                                        <input type="password" name="password" id="password" placeholder="Enter Your Password" className="bg-gray-50 placeholder:text-base border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-2.5 py-6 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required />
+                                                                  </div>
+
+                                                                  <button type="submit" className="w-full text-white bg-[#244034] hover:bg-emerald-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+
+                                                            </form>
+                                                      </div>
+
+
+
+                                                      <div className="modal-action">
+                                                            <form method="dialog">
+                                                                  <button className="btn">Close</button>
+                                                            </form>
+                                                      </div>
+                                                </div>
+                                          </dialog>
+
+
                                     </div>
 
                               </div>

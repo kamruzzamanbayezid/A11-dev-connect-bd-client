@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import useAxios from "../Hooks/useAxios";
 import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const AllJobs = () => {
 
@@ -20,7 +21,7 @@ const AllJobs = () => {
                               setAllJobs(data.data);
                         })
             } catch (error) {
-                  console.error('Error fetching jobs:', error);
+                  toast.error('Error fetching jobs:', error);
             }
 
       }, [axios])
@@ -105,7 +106,7 @@ const AllJobs = () => {
                                                       <p className=' text-[#AAB1B7] mr-3 mt-1'>Deadline: {job?.deadline}</p>
                                                 </div>
 
-                                                <Link to={`jobDetails/${job._id}`}>
+                                                <Link to={`/jobDetails/${job._id}`}>
                                                       <button className=" text-[#D2F34C] bg-[#244034] px-8 py-2 rounded hover:bg-transparent hover:border hover:border-[#244034] hover:text-[#244034] text-xl font-medium ">View Details</button>
                                                 </Link>
                                           </div>

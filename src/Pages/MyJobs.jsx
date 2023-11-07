@@ -3,6 +3,7 @@ import useAuth from "../Hooks/useAuth";
 import useAxios from "../Hooks/useAxios";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const MyJobs = () => {
 
@@ -24,13 +25,34 @@ const MyJobs = () => {
       }, [axios, userEmail]);
 
       const handleDelete = (id) => {
-            axios.delete(`/allJobs/singleJobs/${id}`)
-                  .then(data => {
-                        console.log(data.data);
-                  })
-                  .catch(error => {
-                        console.log(error);
-                  })
+
+            Swal.fire({
+                  title: "Are you sure?",
+                  text: "You won't be able to revert this!",
+                  icon: "warning",
+                  showCancelButton: true,
+                  confirmButtonColor: "#3085d6",
+                  cancelButtonColor: "#d33",
+                  confirmButtonText: "Yes, delete it!"
+            }).then((result) => {
+                  if (result.isConfirmed) {
+                        axios.delete(`/allJobs/singleJobs/${id}`)
+                              .then(data => {
+                                    if (data.data.deletedCount > 0) {
+                                          Swal.fire({
+                                                title: "Deleted!",
+                                                text: "Your job has been deleted.",
+                                                icon: "success"
+                                          });
+                                          const remaining = myJobs.filter(job => job._id !== id)
+                                          setMyJobs(remaining)
+                                    }
+                              })
+                              .catch(error => {
+                                    toast.error(error.message);
+                              })
+                  }
+            });
       }
 
       return (
@@ -38,6 +60,7 @@ const MyJobs = () => {
                   <div className="bg-[#244034] min-h-[35vh] flex items-center justify-center">
                         <h1 style={{ fontFamily: 'Playpen Sans' }} className="text-center text-5xl  text-white font-light">My Jobs</h1>
                   </div>
+                  <h1>Totla Jobs: {myJobs.length}</h1>
                   <div className="bg-[#F5F7FA] pt-10 pb-20">
 
                         <div className="max-w-7xl mx-auto">

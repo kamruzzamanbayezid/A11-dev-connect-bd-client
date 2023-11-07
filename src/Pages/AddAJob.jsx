@@ -10,7 +10,6 @@ const AddAJob = () => {
       const { user } = useAuth();
       const userName = user?.displayName;
       const userEmail = user?.email;
-      console.log(userEmail);
       const axios = useAxios();
 
 

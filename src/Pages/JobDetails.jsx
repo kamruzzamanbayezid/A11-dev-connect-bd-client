@@ -3,16 +3,21 @@ import { useParams } from "react-router-dom";
 import useAxios from "../Hooks/useAxios";
 import { CiLocationOn } from "react-icons/ci";
 import toast from "react-hot-toast";
+import useAuth from "../Hooks/useAuth";
 
 
 const JobDetails = () => {
 
       const { id } = useParams();
+      const { user } = useAuth();
 
       const [jobDetails, setJobDetails] = useState({});
       const axios = useAxios();
 
-      const { jobCategory, title, userName, image, logo, salaryRange, postingDate, deadline, applicantsNumber, description } = jobDetails || {};
+      // current date
+      const currentDate = new Date();
+
+      const { jobCategory, title, userName, userEmail, image, logo, salaryRange, postingDate, deadline, applicantsNumber, description } = jobDetails || {};
 
       useEffect(() => {
             axios
@@ -24,6 +29,13 @@ const JobDetails = () => {
                         toast.error("Error fetching job details:", error);
                   });
       }, [axios, id]);
+
+
+      // validation for apply
+      const isDeadlinePassed = new Date(deadline) < currentDate;
+      const matchUser = userEmail === user?.email
+
+      console.log(isDeadlinePassed, matchUser)
 
       return (
             <div className="bg-[#F5F7FA]">
@@ -90,8 +102,24 @@ const JobDetails = () => {
                                                 <li className="text-[#AAB1B7] mb-3">Applicants: <span className="text-[#001D38]">{applicantsNumber}</span></li>
                                           </div>
 
-                                          <button onClick={() => document.getElementById('apply-modal').showModal()} className="w-full mt-4 text-[#D2F34C] bg-[#244034] px-8 py-2 rounded hover:bg-transparent hover:border hover:border-[#244034] hover:text-[#244034] text-xl font-medium ">Apply now</button>
+                                          {/* <button onClick={() => document.getElementById('apply-modal').showModal()} className="w-full mt-4 text-[#D2F34C] bg-[#244034] px-8 py-2 rounded hover:bg-transparent hover:border hover:border-[#244034] hover:text-[#244034] text-xl font-medium ">Apply now</button> */}
 
+                                          <button
+                                                onClick={() => {
+                                                      if (!matchUser && !isDeadlinePassed) {
+                                                            document.getElementById("apply-modal").showModal();
+                                                      } else {
+                                                            if (matchUser) {
+                                                                  toast.error("You cannot apply for your own job.");
+                                                            } else if (isDeadlinePassed) {
+                                                                  toast.error("The application deadline has passed.");
+                                                            }
+                                                      }
+                                                }}
+                                                className="w-full mt-4 text-[#D2F34C] bg-[#244034] px-8 py-2 rounded hover:bg-transparent hover:border hover:border-[#244034] hover:text-[#244034] text-xl font-medium"
+                                          >
+                                                Apply now
+                                          </button>
 
                                           {/* Modal part */}
                                           <dialog id="apply-modal" className="modal">

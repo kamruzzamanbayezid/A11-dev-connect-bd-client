@@ -4,16 +4,25 @@ import useAxios from "../Hooks/useAxios";
 import { CiLocationOn } from "react-icons/ci";
 import toast from "react-hot-toast";
 import useAuth from "../Hooks/useAuth";
+import Swal from "sweetalert2";
 
 
 const JobDetails = () => {
 
       const { id } = useParams();
       const { user } = useAuth();
+      // const user_Name = user?.displayName;
+      // const user_Email = user?.email;
+
+      const [loggedUser, setLoggedUser] = useState(user.displayName);
+      const [loggedEmail, setLoggedEmail] = useState(user.email);
+      const [resumeLink, setResumeLink] = useState('')
 
       const [jobDetails, setJobDetails] = useState({});
       const axios = useAxios();
 
+      console.log(loggedUser, loggedEmail);
+      // console.log(user_Name, user_Email);
       // current date
       const currentDate = new Date();
 
@@ -35,7 +44,56 @@ const JobDetails = () => {
       const isDeadlinePassed = new Date(deadline) < currentDate;
       const matchUser = userEmail === user?.email
 
-      console.log(isDeadlinePassed, matchUser)
+      const handleApplyJob = () => {
+            if (!matchUser && !isDeadlinePassed) {
+                  document.getElementById("apply-modal").showModal();
+            } else {
+                  if (matchUser) {
+                        toast.error("You cannot apply for your own job.");
+                  } else if (isDeadlinePassed) {
+                        toast.error("The application deadline has passed.");
+                  }
+            }
+
+
+      }
+
+      const handleSubmitJob = (e) => {
+            e.preventDefault();
+
+            const formData = {
+                  jobCategory,
+                  title,
+                  loggedUser,
+                  loggedEmail,
+                  logo,
+                  salaryRange,
+                  postingDate,
+                  deadline,
+            };
+
+            // apply for a job
+            // axios.post('/user/appliedJobs', formData)
+            //       .then(data => {
+            //             console.log(data.data);
+            //             if (data.data.insertedId) {
+            //                   Swal.fire({
+            //                         title: "Good job!",
+            //                         text: "Successfully added the job!",
+            //                         icon: "success"
+            //                   });
+            //                   // resetForm();
+            //             }
+            //       })
+            //       .catch(error => {
+            //             console.log(error);
+            //             toast.error(error.message)
+            //       })
+
+
+
+      };
+
 
       return (
             <div className="bg-[#F5F7FA]">
@@ -102,20 +160,9 @@ const JobDetails = () => {
                                                 <li className="text-[#AAB1B7] mb-3">Applicants: <span className="text-[#001D38]">{applicantsNumber}</span></li>
                                           </div>
 
-                                          {/* <button onClick={() => document.getElementById('apply-modal').showModal()} className="w-full mt-4 text-[#D2F34C] bg-[#244034] px-8 py-2 rounded hover:bg-transparent hover:border hover:border-[#244034] hover:text-[#244034] text-xl font-medium ">Apply now</button> */}
-
                                           <button
-                                                onClick={() => {
-                                                      if (!matchUser && !isDeadlinePassed) {
-                                                            document.getElementById("apply-modal").showModal();
-                                                      } else {
-                                                            if (matchUser) {
-                                                                  toast.error("You cannot apply for your own job.");
-                                                            } else if (isDeadlinePassed) {
-                                                                  toast.error("The application deadline has passed.");
-                                                            }
-                                                      }
-                                                }}
+
+                                                onClick={handleApplyJob}
                                                 className="w-full mt-4 text-[#D2F34C] bg-[#244034] px-8 py-2 rounded hover:bg-transparent hover:border hover:border-[#244034] hover:text-[#244034] text-xl font-medium"
                                           >
                                                 Apply now
@@ -127,19 +174,33 @@ const JobDetails = () => {
 
 
                                                       <div className="w-full  mx-auto p-4 dark:bg-gray-800 dark:border-gray-700">
-                                                            <form className="space-y-6 mb-5">
-                                                                  <h5 style={{ fontFamily: 'Playpen Sans' }} className="text-6xl font-medium text-center text-[#244034] dark:text-white">Apply for the job</h5>
+                                                            <h5 style={{ fontFamily: 'Playpen Sans' }} className="text-4xl font-medium text-center text-[#244034] dark:text-white">Apply for the job</h5>
+                                                            <form onSubmit={handleSubmitJob} className="space-y-6 mb-5">
 
                                                                   <div>
-                                                                        <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
-                                                                        <input type="email" name="email" id="email" className="bg-gray-50 border border-gray-300 placeholder:text-base text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-2.5 py-6 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="name@company.com" required />
+                                                                        <label htmlFor="user_name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Name</label>
+                                                                        <input
+                                                                              value={loggedUser}
+                                                                              onChange={(e) => setLoggedUser(e.target.value)}
+                                                                              type="text" name="name" id="user_name" className="bg-gray-50 border border-gray-300 placeholder:text-base text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-2.5 py-4 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="name@company.com" required />
                                                                   </div>
                                                                   <div>
-                                                                        <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your password</label>
-                                                                        <input type="password" name="password" id="password" placeholder="Enter Your Password" className="bg-gray-50 placeholder:text-base border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-2.5 py-6 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required />
+                                                                        <label htmlFor="user_email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Email</label>
+                                                                        <input
+                                                                              value={loggedEmail}
+                                                                              onChange={(e) => setLoggedEmail(e.target.value)}
+                                                                              type="email" name="email" id="user_email" className="bg-gray-50 placeholder:text-base border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-2.5 py-4 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required />
+                                                                  </div>
+                                                                  <div>
+                                                                        <label htmlFor="resumeLink" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Resume Link</label>
+                                                                        <input
+                                                                              value={resumeLink}
+                                                                              onChange={(e) => setResumeLink(e.target.value)}
+                                                                              type="text" name="resumeLink" id="resumeLink" className="bg-gray-50 border border-gray-300 placeholder:text-base text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-2.5 py-4 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Enter the URL of your resume" required />
                                                                   </div>
 
-                                                                  <button type="submit" className="w-full text-white bg-[#244034] hover:bg-emerald-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+
+                                                                  <button type="submit" className="w-full text-white bg-[#244034] hover:bg-emerald-700 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-lg px-5 py-4 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
 
                                                             </form>
                                                       </div>

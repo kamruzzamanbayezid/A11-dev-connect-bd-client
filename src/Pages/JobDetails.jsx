@@ -14,17 +14,11 @@ const JobDetails = () => {
 
       const [loggedUser, setLoggedUser] = useState('');
       const [loggedEmail, setLoggedEmail] = useState('');
-      const [resumeLink, setResumeLink] = useState('')
+      const [resumeLink, setResumeLink] = useState('');
+      const [hasApplied, setHasApplied] = useState(false);
 
       const [jobDetails, setJobDetails] = useState({});
       const axios = useAxios();
-
-      useEffect(() => {
-            if (user) {
-                  setLoggedUser(user?.displayName)
-                  setLoggedEmail(user?.email)
-            }
-      }, [user])
 
       // current date
       const currentDate = new Date();
@@ -40,15 +34,35 @@ const JobDetails = () => {
                   .catch((error) => {
                         toast.error("Error fetching job details:", error);
                   });
-      }, [axios, id]);
+
+
+            if (user) {
+                  setLoggedUser(user?.displayName)
+                  setLoggedEmail(user?.email)
+
+                  const userEmail = user.email;
+                  axios.get(`/user/appliedJobs?loggedEmail=${userEmail}`)
+                        .then((data) => {
+                              console.log('applied jobs', data.data);
+                              const appliedJobs = data.data;
+                              const jobIds = appliedJobs.map((job) => console.log(job._id));
+                              if (jobIds.includes(id)) {
+                                    setHasApplied(true);
+                              }
+                        });
+            }
+      }, [axios, id, user]);
 
 
       // validation for apply
       const isDeadlinePassed = new Date(deadline) < currentDate;
       const matchUser = userEmail === user?.email
 
+
       const handleApplyJob = () => {
-            if (!matchUser && !isDeadlinePassed) {
+            if (hasApplied) {
+                  toast.error("You have already applied for this job.");
+            } else if (!matchUser && !isDeadlinePassed) {
                   document.getElementById("apply-modal").showModal();
             } else {
                   if (matchUser) {
@@ -57,44 +71,64 @@ const JobDetails = () => {
                         toast.error("The application deadline has passed.");
                   }
             }
+      };
 
-
-      }
 
       const handleSubmitJob = (e) => {
             e.preventDefault();
 
             const formData = {
+                  jobId: id,
                   jobCategory,
                   title,
                   loggedUser,
                   loggedEmail,
+                  resumeLink,
                   logo,
                   salaryRange,
                   postingDate,
                   deadline,
             };
 
+
             // apply for a job
             axios.post('/user/appliedJobs', formData)
                   .then(data => {
                         console.log(data.data);
                         if (data.data.insertedId) {
-                              // Swal.fire({
-                              //       title: "Good job!",
-                              //       text: "Successfully added the job!",
-                              //       icon: "success"
-                              // });
-                              window.location.reload()
-                              toast.success('done')
+
+                              axios
+                                    .put(`/allJobs/singleJobs/${id}`, { applicantsNumber: applicantsNumber + 1 })
+                                    .then((data) => {
+                                          console.log(data);
+                                          if (data.status === 200) {
+                                                Swal.fire({
+                                                      title: "Good job!",
+                                                      text: "Successfully added the job!",
+                                                      icon: "success"
+                                                });
+
+                                                // update in the ui
+                                                axios.get(`/allJobs/singleJobs/${id}`).then((data) => {
+                                                      setJobDetails(data.data);
+                                                });
+                                          }
+                                    })
+                                    .catch((error) => {
+                                          toast.error(error.message);
+                                    });
+
+                              // window.location.reload()
+                        }
+                        else {
+                              toast.error('You Already Apply for this job')
                         }
                   })
                   .catch(error => {
-                        console.log(error);
                         toast.error(error.message)
                   })
 
-
+            // update applicants number
 
       };
 

@@ -4,11 +4,15 @@ import 'react-tabs/style/react-tabs.css';
 import './jobByCategory.css'
 import useAxios from '../../../Hooks/useAxios';
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
+import useAuth from '../../../Hooks/useAuth';
 // import axios from 'axios';
 
 const JobByCategory = () => {
+
+      const { user } = useAuth();
+      const navigate = useNavigate();
 
       const axios = useAxios();
       const [allJobs, setAllJobs] = useState([]);
@@ -39,6 +43,11 @@ const JobByCategory = () => {
                   console.error('Error fetching jobs:', error);
             }
       };
+
+      const handleNavigate = () => {
+            toast.error('You have to log in first to view details')
+            navigate('/login')
+      }
 
       return (
             <div className='max-w-7xl mx-auto mb-16'>
@@ -82,9 +91,15 @@ const JobByCategory = () => {
                                                       <div className='md:pr-2 pb-6 md:pb-0 flex flex-col space-y-7'>
                                                             <span className='text-xl font-medium text-[#AAB1B7] '>Applicants: {job?.applicantsNumber}</span>
 
-                                                            <Link to={`/jobDetails/${job._id}`}>
-                                                                  <button className=" text-[#D2F34C] bg-[#244034] px-8 py-2 rounded hover:bg-transparent hover:border hover:border-[#244034] hover:text-[#244034] text-xl font-medium ">View Details</button>
-                                                            </Link>
+                                                            {
+                                                                  user ?
+
+                                                                        <Link to={`/jobDetails/${job._id}`}>
+                                                                              <button className=" text-[#D2F34C] bg-[#244034] px-8 py-2 rounded hover:bg-transparent hover:border hover:border-[#244034] hover:text-[#244034] text-xl font-medium ">View Details</button>
+                                                                        </Link>
+                                                                        :
+                                                                        <button onClick={handleNavigate} className=" text-[#D2F34C] bg-[#244034] px-8 py-2 rounded hover:bg-transparent hover:border hover:border-[#244034] hover:text-[#244034] text-xl font-medium ">View Details</button>
+                                                            }
                                                       </div>
                                                 </div>
                                           ))
@@ -120,9 +135,15 @@ const JobByCategory = () => {
                                                       <div className='md:pr-2 pb-6 md:pb-0 flex flex-col space-y-7'>
                                                             <span className='text-xl font-medium text-[#AAB1B7] '>Applicants: {job?.applicantsNumber}</span>
 
-                                                            <Link to={`/jobDetails/${job._id}`}>
-                                                                  <button className=" text-[#D2F34C] bg-[#244034] px-8 py-2 rounded hover:bg-transparent hover:border hover:border-[#244034] hover:text-[#244034] text-xl font-medium ">View Details</button>
-                                                            </Link>
+                                                            {
+                                                                  user ?
+
+                                                                        <Link to={`/jobDetails/${job._id}`}>
+                                                                              <button className=" text-[#D2F34C] bg-[#244034] px-8 py-2 rounded hover:bg-transparent hover:border hover:border-[#244034] hover:text-[#244034] text-xl font-medium ">View Details</button>
+                                                                        </Link>
+                                                                        :
+                                                                        <button onClick={handleNavigate} className=" text-[#D2F34C] bg-[#244034] px-8 py-2 rounded hover:bg-transparent hover:border hover:border-[#244034] hover:text-[#244034] text-xl font-medium ">View Details</button>
+                                                            }
                                                       </div>
                                                 </div>
                                           ))
@@ -158,9 +179,15 @@ const JobByCategory = () => {
                                                       <div className='md:pr-2 pb-6 md:pb-0 flex flex-col space-y-7'>
                                                             <span className='text-xl font-medium text-[#AAB1B7] '>Applicants: {job?.applicantsNumber}</span>
 
-                                                            <Link to={`/jobDetails/${job._id}`}>
-                                                                  <button className=" text-[#D2F34C] bg-[#244034] px-8 py-2 rounded hover:bg-transparent hover:border hover:border-[#244034] hover:text-[#244034] text-xl font-medium ">View Details</button>
-                                                            </Link>
+                                                            {
+                                                                  user ?
+
+                                                                        <Link to={`/jobDetails/${job._id}`}>
+                                                                              <button className=" text-[#D2F34C] bg-[#244034] px-8 py-2 rounded hover:bg-transparent hover:border hover:border-[#244034] hover:text-[#244034] text-xl font-medium ">View Details</button>
+                                                                        </Link>
+                                                                        :
+                                                                        <button onClick={handleNavigate} className=" text-[#D2F34C] bg-[#244034] px-8 py-2 rounded hover:bg-transparent hover:border hover:border-[#244034] hover:text-[#244034] text-xl font-medium ">View Details</button>
+                                                            }
                                                       </div>
                                                 </div>
                                           ))
@@ -196,9 +223,15 @@ const JobByCategory = () => {
                                                       <div className='md:pr-2 pb-6 md:pb-0 flex flex-col space-y-7'>
                                                             <span className='text-xl font-medium text-[#AAB1B7] '>Applicants: {job?.applicantsNumber}</span>
 
-                                                            <Link to={`/jobDetails/${job._id}`}>
-                                                                  <button className=" text-[#D2F34C] bg-[#244034] px-8 py-2 rounded hover:bg-transparent hover:border hover:border-[#244034] hover:text-[#244034] text-xl font-medium ">View Details</button>
-                                                            </Link>
+                                                            {
+                                                                  user ?
+
+                                                                        <Link to={`/jobDetails/${job._id}`}>
+                                                                              <button className=" text-[#D2F34C] bg-[#244034] px-8 py-2 rounded hover:bg-transparent hover:border hover:border-[#244034] hover:text-[#244034] text-xl font-medium ">View Details</button>
+                                                                        </Link>
+                                                                        :
+                                                                        <button onClick={handleNavigate} className=" text-[#D2F34C] bg-[#244034] px-8 py-2 rounded hover:bg-transparent hover:border hover:border-[#244034] hover:text-[#244034] text-xl font-medium ">View Details</button>
+                                                            }
                                                       </div>
                                                 </div>
                                           ))
@@ -234,9 +267,15 @@ const JobByCategory = () => {
                                                       <div className='md:pr-2 pb-6 md:pb-0 flex flex-col space-y-7'>
                                                             <span className='text-xl font-medium text-[#AAB1B7] '>Applicants: {job?.applicantsNumber}</span>
 
-                                                            <Link to={`/jobDetails/${job._id}`}>
-                                                                  <button className=" text-[#D2F34C] bg-[#244034] px-8 py-2 rounded hover:bg-transparent hover:border hover:border-[#244034] hover:text-[#244034] text-xl font-medium ">View Details</button>
-                                                            </Link>
+                                                            {
+                                                                  user ?
+
+                                                                        <Link to={`/jobDetails/${job._id}`}>
+                                                                              <button className=" text-[#D2F34C] bg-[#244034] px-8 py-2 rounded hover:bg-transparent hover:border hover:border-[#244034] hover:text-[#244034] text-xl font-medium ">View Details</button>
+                                                                        </Link>
+                                                                        :
+                                                                        <button onClick={handleNavigate} className=" text-[#D2F34C] bg-[#244034] px-8 py-2 rounded hover:bg-transparent hover:border hover:border-[#244034] hover:text-[#244034] text-xl font-medium ">View Details</button>
+                                                            }
                                                       </div>
                                                 </div>
                                           ))

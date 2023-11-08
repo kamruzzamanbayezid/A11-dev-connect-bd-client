@@ -11,18 +11,21 @@ const JobDetails = () => {
 
       const { id } = useParams();
       const { user } = useAuth();
-      // const user_Name = user?.displayName;
-      // const user_Email = user?.email;
 
-      const [loggedUser, setLoggedUser] = useState(user.displayName);
-      const [loggedEmail, setLoggedEmail] = useState(user.email);
+      const [loggedUser, setLoggedUser] = useState('');
+      const [loggedEmail, setLoggedEmail] = useState('');
       const [resumeLink, setResumeLink] = useState('')
 
       const [jobDetails, setJobDetails] = useState({});
       const axios = useAxios();
 
-      console.log(loggedUser, loggedEmail);
-      // console.log(user_Name, user_Email);
+      useEffect(() => {
+            if (user) {
+                  setLoggedUser(user?.displayName)
+                  setLoggedEmail(user?.email)
+            }
+      }, [user])
+
       // current date
       const currentDate = new Date();
 
@@ -73,22 +76,23 @@ const JobDetails = () => {
             };
 
             // apply for a job
-            // axios.post('/user/appliedJobs', formData)
-            //       .then(data => {
-            //             console.log(data.data);
-            //             if (data.data.insertedId) {
-            //                   Swal.fire({
-            //                         title: "Good job!",
-            //                         text: "Successfully added the job!",
-            //                         icon: "success"
-            //                   });
-            //                   // resetForm();
-            //             }
-            //       })
-            //       .catch(error => {
-            //             console.log(error);
-            //             toast.error(error.message)
-            //       })
+            axios.post('/user/appliedJobs', formData)
+                  .then(data => {
+                        console.log(data.data);
+                        if (data.data.insertedId) {
+                              // Swal.fire({
+                              //       title: "Good job!",
+                              //       text: "Successfully added the job!",
+                              //       icon: "success"
+                              // });
+                              window.location.reload()
+                              toast.success('done')
+                        }
+                  })
+                  .catch(error => {
+                        console.log(error);
+                        toast.error(error.message)
+                  })
 
 
 

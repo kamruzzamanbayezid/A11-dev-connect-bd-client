@@ -1,9 +1,13 @@
 import { useEffect, useState } from "react";
 import useAxios from "../Hooks/useAxios";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import useAuth from "../Hooks/useAuth";
 
 const AllJobs = () => {
+
+      const { user } = useAuth();
+      const navigate = useNavigate()
 
       const [allJobs, setAllJobs] = useState([]);
       const [inputValue, setInputValue] = useState("");
@@ -35,8 +39,15 @@ const AllJobs = () => {
             setIsFiltered(true);
       };
 
+      const handleNavigate = () => {
+            toast.error('You have to log in first to view details')
+            navigate('/login')
+      }
+
       return (
             <div className="bg-[#F5F7FA] pt-10 pb-20">
+
+
                   <h5 style={{ fontFamily: 'Playpen Sans' }} className="text-6xl pt-6 mb-7 font-medium text-center text-[#244034] dark:text-white">All Jobs</h5>
 
                   <div className="flex justify-center px-4">
@@ -106,9 +117,15 @@ const AllJobs = () => {
                                                       <p className=' text-[#AAB1B7] mr-3 mt-1'>Deadline: {job?.deadline}</p>
                                                 </div>
 
-                                                <Link to={`/jobDetails/${job._id}`}>
-                                                      <button className=" text-[#D2F34C] bg-[#244034] px-8 py-2 rounded hover:bg-transparent hover:border hover:border-[#244034] hover:text-[#244034] text-xl font-medium ">View Details</button>
-                                                </Link>
+                                                {
+                                                      user ?
+
+                                                            <Link to={`/jobDetails/${job._id}`}>
+                                                                  <button className=" text-[#D2F34C] bg-[#244034] px-8 py-2 rounded hover:bg-transparent hover:border hover:border-[#244034] hover:text-[#244034] text-xl font-medium ">View Details</button>
+                                                            </Link>
+                                                            :
+                                                            <button onClick={handleNavigate} className=" text-[#D2F34C] bg-[#244034] px-8 py-2 rounded hover:bg-transparent hover:border hover:border-[#244034] hover:text-[#244034] text-xl font-medium ">View Details</button>
+                                                }
                                           </div>
                                     </div>
                               ))

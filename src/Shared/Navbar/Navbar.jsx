@@ -34,27 +34,36 @@ const Navbar = () => {
                         All Jobs
                   </NavLink>
             </li>
-            <li className="text-lg font-normal">
-                  <NavLink to="/appliedJobs" style={({ isActive }) => ({
-                        color: isActive ? '#D2F34C' : '#FFF'
-                  })}>
-                        Applied Jobs
-                  </NavLink>
-            </li>
-            <li className="text-lg font-normal">
-                  <NavLink to="/addAJob" style={({ isActive }) => ({
-                        color: isActive ? '#D2F34C' : '#FFF'
-                  })}>
-                        Add a Job
-                  </NavLink>
-            </li>
-            <li className="text-lg font-normal">
-                  <NavLink to="/myJobs" style={({ isActive }) => ({
-                        color: isActive ? '#D2F34C' : '#FFF'
-                  })}>
-                        My Jobs
-                  </NavLink>
-            </li>
+            {
+                  user?.email &&
+                  <li className="text-lg font-normal">
+                        <NavLink to="/appliedJobs" style={({ isActive }) => ({
+                              color: isActive ? '#D2F34C' : '#FFF'
+                        })}>
+                              Applied Jobs
+                        </NavLink>
+                  </li>
+            }
+            {
+                  user?.email &&
+                  <li className="text-lg font-normal">
+                        <NavLink to="/addAJob" style={({ isActive }) => ({
+                              color: isActive ? '#D2F34C' : '#FFF'
+                        })}>
+                              Add a Job
+                        </NavLink>
+                  </li>
+            }
+            {
+                  user?.email &&
+                  <li className="text-lg font-normal">
+                        <NavLink to="/myJobs" style={({ isActive }) => ({
+                              color: isActive ? '#D2F34C' : '#FFF'
+                        })}>
+                              My Jobs
+                        </NavLink>
+                  </li>
+            }
             <li className="text-lg font-normal">
                   <NavLink to="/blogs" style={({ isActive }) => ({
                         color: isActive ? '#D2F34C' : '#FFF'
@@ -148,11 +157,14 @@ const Navbar = () => {
 
                               </dialog>
                               {
-                                    user?.email &&
-                                    <div className="avatar ml-1">
-                                          <div className="w-14 rounded-full">
-                                                <img src={user?.photoURL} />
+                                    user?.email && <div className="dropdown dropdown-end ml-2">
+                                          <div tabIndex={0} className="w-14 rounded-full">
+                                                <img src={user.photoURL} className="rounded-full" />
                                           </div>
+                                          <ul tabIndex={0} className="dropdown-content z-[1] p-3 shadow bg-base-100 rounded-box w-fit">
+                                                <li><a className="text-[#E7AB3C] mb-2">{user.displayName}</a></li>
+                                                <li><a className="text-[#E7AB3C]">{user.email}</a></li>
+                                          </ul>
                                     </div>
                               }
                         </div>

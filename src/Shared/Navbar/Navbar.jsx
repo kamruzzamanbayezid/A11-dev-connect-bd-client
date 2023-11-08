@@ -1,6 +1,5 @@
 import { Link, NavLink } from "react-router-dom";
 import './Navbar.css'
-import Login from "../../Pages/Login";
 import useAuth from "../../Hooks/useAuth";
 import toast from "react-hot-toast";
 
@@ -96,8 +95,8 @@ const Navbar = () => {
                               </NavLink>
                         </li>
                         :
-                        <li onClick={() => document.getElementById('my_modal_4').showModal()} className="text-lg font-normal flex md:hidden">
-                              <NavLink style={({ isActive }) => ({
+                        <li className="text-lg font-normal flex md:hidden">
+                              <NavLink to='login' style={({ isActive }) => ({
                                     color: '#244034',
                                     backgroundColor: '#D2F34C',
                                     width: '100%',
@@ -140,22 +139,10 @@ const Navbar = () => {
                                     user?.email ?
                                           <button onClick={handleLogOut} className="bg-[#D2F34C] text-[#244034] px-8 hover:bg-transparent hover:text-[#D2F34C] hover:border-2 hover:border-[#D2F34C] py-2 rounded-full text-xl font-medium hidden md:block">Log out</button>
                                           :
-                                          <button className="bg-[#D2F34C] text-[#244034] px-8 hover:bg-transparent hover:text-[#D2F34C] hover:border-2 hover:border-[#D2F34C] py-2 rounded-full text-xl font-medium hidden md:block" onClick={() => document.getElementById('my_modal_4').showModal()}>Login</button>
+                                          <Link to='/login'>
+                                                <button className="bg-[#D2F34C] text-[#244034] px-8 hover:bg-transparent hover:text-[#D2F34C] hover:border-2 hover:border-[#D2F34C] py-2 rounded-full text-xl font-medium hidden md:block">Login</button>
+                                          </Link>
                               }
-                              <dialog id="my_modal_4" className="modal">
-                                    <div className="modal-box w-11/12 max-w-3xl">
-
-                                          {/* Login */}
-                                          <Login></Login>
-                                          <div className="modal-action">
-                                                <form method="dialog">
-                                                      {/* if there is a button, it will close the modal */}
-                                                      <button className="btn bg-[#D2F34C] hover:bg-[#D2F34C]">Close</button>
-                                                </form>
-                                          </div>
-                                    </div>
-
-                              </dialog>
                               {
                                     user?.email && <div className="dropdown dropdown-end ml-2">
                                           <div tabIndex={0} className="w-14 rounded-full">

@@ -11,6 +11,7 @@ import UpdateJobs from "../Pages/UpdateJobs";
 import AppliedJob from "../Pages/AppliedJob";
 import PrivateRoute from "./PrivateRoute";
 import LoginPage from "../Pages/LoginPage";
+import Blog from "../Pages/Blog";
 
 
 const router = createBrowserRouter([
@@ -55,6 +56,10 @@ const router = createBrowserRouter([
                   {
                         path: 'login',
                         element: <LoginPage></LoginPage>
+                  },
+                  { 
+                        path: 'blogs',
+                        element: <Blog></Blog>
                   }
             ]
       }

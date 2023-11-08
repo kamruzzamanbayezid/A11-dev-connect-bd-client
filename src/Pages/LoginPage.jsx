@@ -9,6 +9,7 @@ const LoginPage = () => {
       const { login } = useAuth();
       const location = useLocation();
       const navigate = useNavigate();
+      console.log(location);
 
 
       const handleLogin = (e) => {

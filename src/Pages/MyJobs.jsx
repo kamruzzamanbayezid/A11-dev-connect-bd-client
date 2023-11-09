@@ -15,15 +15,18 @@ const MyJobs = () => {
       const [myJobs, setMyJobs] = useState([]);
 
       useEffect(() => {
-            axios
-                  .get(`/jobs?userEmail=${userEmail}`)
-                  .then((data) => {
-                        setMyJobs(data.data);
-                  })
-                  .catch((error) => {
-                        toast.error(error.message);
-                  });
-      }, [axios, userEmail]);
+
+            user?.email &&
+                  axios
+                        .get(`/jobs?userEmail=${userEmail}`)
+                        .then((data) => {
+                              setMyJobs(data.data);
+                        })
+                        .catch((error) => {
+                              toast.error(error.message);
+                              console.log(error.message);
+                        });
+      }, [axios, userEmail, user?.email]);
 
       const handleDelete = (id) => {
 

@@ -246,7 +246,7 @@ const JobDetails = () => {
 
                                                             </form>
                                                       </div>
-
+git 
                                                       <div className="modal-action">
                                                             <form method="dialog">
                                                                   <button className="btn">Close</button>

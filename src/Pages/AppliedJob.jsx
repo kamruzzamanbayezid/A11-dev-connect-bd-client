@@ -13,13 +13,15 @@ const AppliedJob = () => {
 
 
       useEffect(() => {
-            axios.get(`/user/appliedJobs?loggedEmail=${user?.email}`)
-                  .then((data) => {
-                        setAppliedJobs(data.data)
-                  })
-                  .catch(error => {
-                        toast.error(error.message)
-                  })
+            user?.email &&
+                  axios.get(`/user/appliedJobs?loggedEmail=${user?.email}`)
+                        .then((data) => {
+                              setAppliedJobs(data.data)
+                        })
+                        .catch(error => {
+                              toast.error(error.message)
+                              console.log(error.message);
+                        })
       }, [axios, user?.email])
 
 

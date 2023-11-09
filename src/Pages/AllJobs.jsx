@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import useAxios from "../Hooks/useAxios";
-import { Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import useAuth from "../Hooks/useAuth";
+import { Helmet } from "react-helmet-async";
 
 const AllJobs = () => {
 
@@ -40,6 +41,9 @@ const AllJobs = () => {
 
       return (
             <div className="bg-[#F5F7FA] pt-10 pb-20">
+                  <Helmet>
+                        <title>DevConnect.BD | All Jobs</title>
+                  </Helmet>
 
 
                   <h5 style={{ fontFamily: 'Playpen Sans' }} className="text-6xl pt-6 mb-7 font-medium text-center text-[#244034] dark:text-white">All Jobs</h5>

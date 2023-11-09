@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import SocialLogin from "./Home/SocialLogin";
 import useAuth from "../Hooks/useAuth";
 import toast from "react-hot-toast";
+import { Helmet } from "react-helmet-async";
 
 const Register = () => {
 
@@ -48,6 +49,9 @@ const Register = () => {
 
       return (
             <div>
+                  <Helmet>
+                        <title>DevConnect.BD | Register</title>
+                  </Helmet>
                   <div className="bg-[#244034] min-h-[35vh]">
                         <h1 style={{ fontFamily: 'Playpen Sans' }} className="text-center text-5xl pt-7 text-white font-light">Register</h1>
                         <p className="text-center mt-6 text-slate-200">Create an account & Start posting or hiring talents</p>

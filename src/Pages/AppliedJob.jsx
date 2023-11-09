@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import useAuth from "../Hooks/useAuth";
 import useAxios from "../Hooks/useAxios";
 import toast from "react-hot-toast";
+import { Helmet } from "react-helmet-async";
 
 const AppliedJob = () => {
 
@@ -34,6 +35,9 @@ const AppliedJob = () => {
 
       return (
             <div>
+                  <Helmet>
+                        <title>DevConnect.BD | Applied Jobs</title>
+                  </Helmet>
                   <div className="bg-[#244034] min-h-[35vh] flex justify-center items-center">
                         <div>
                               <h1 style={{ fontFamily: 'Playpen Sans' }} className="text-center text-5xl  text-white font-light">Job You Applied</h1>

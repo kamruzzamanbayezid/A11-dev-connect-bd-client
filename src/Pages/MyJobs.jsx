@@ -4,6 +4,7 @@ import useAxios from "../Hooks/useAxios";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const MyJobs = () => {
 
@@ -57,6 +58,10 @@ const MyJobs = () => {
 
       return (
             <div>
+                  <Helmet>
+                        <title>DevConnect.BD | My Jobs</title>
+                  </Helmet>
+
                   <div className="bg-[#244034] min-h-[35vh] flex items-center justify-center">
                         <h1 style={{ fontFamily: 'Playpen Sans' }} className="text-center text-5xl  text-white font-light">My Jobs</h1>
                   </div>

@@ -1,7 +1,11 @@
+import { Helmet } from "react-helmet-async";
 
 const Blog = () => {
       return (
             <div className="bg-[#244034]">
+                  <Helmet>
+                        <title>DevConnect.BD | Blogs</title>
+                  </Helmet>
                   <div className="max-w-7xl mx-auto">
                         <div className="py-10 space-y-6">
                               <div className="bg-[#FFF] p-4 md:p-6 md:py-10 rounded-2xl">

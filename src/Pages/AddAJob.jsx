@@ -3,6 +3,7 @@ import useAuth from "../Hooks/useAuth";
 import useAxios from "../Hooks/useAxios";
 import Swal from "sweetalert2";
 import toast from "react-hot-toast";
+import { Helmet } from "react-helmet-async";
 // import axios from "axios";
 
 const AddAJob = () => {
@@ -70,7 +71,11 @@ const AddAJob = () => {
       };
 
       return (
-            <div >
+            <div>
+                  <Helmet>
+                        <title>DevConnect.BD | Add a Jobs</title>
+                  </Helmet>
+
                   <div className="bg-[#244034] min-h-[35vh]">
                         <h1 style={{ fontFamily: 'Playpen Sans' }} className="text-center text-5xl pt-7 text-white font-light">Post a Job</h1>
                         <p className="text-center mt-6 text-slate-200">Get your job posting seen by thousands of job seekers.</p>

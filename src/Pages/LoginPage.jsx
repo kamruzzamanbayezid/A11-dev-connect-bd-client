@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import SocialLogin from "./Home/SocialLogin";
 import useAuth from "../Hooks/useAuth";
 import toast from "react-hot-toast";
+import { Helmet } from "react-helmet-async";
 
 const LoginPage = () => {
 
@@ -44,6 +45,10 @@ const LoginPage = () => {
       return (
 
             <div className="w-full md:w-9/12 md:mx-auto my-16 mx-auto p-4 dark:bg-gray-800 dark:border-gray-700">
+                  <Helmet>
+                        <title>DevConnect.BD | Login</title>
+                  </Helmet>
+
                   <form className="space-y-6 mb-5" onSubmit={handleLogin}>
                         <h5 style={{ fontFamily: 'Playpen Sans' }} className="text-6xl font-medium text-center text-[#244034] dark:text-white">Hi, Welcome Back!</h5>
                         <div className="text-lg text-center font-medium text-gray-500 dark:text-gray-300">

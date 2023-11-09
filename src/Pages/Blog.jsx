@@ -40,6 +40,15 @@ const Blog = () => {
 
 
                               </div>
+                              <div className="bg-[#FFF] p-6 rounded-2xl">
+                                    <p className="text-center text-xl font-medium underline">Q5: Explain Your Code</p>
+
+                                    <div>
+                                          <li style={{ fontFamily: 'Playpen Sans' }} className="text-2xl pt-3  font-bold text-[#244034] dark:text-white">Code explanation!</li>
+                                          <p className="pl-7 pt-2 text-gray-600">I make a DevConnectBD full stack website.Where developer can apply or post jobs.Now i simply give a overview how i code for my website.</p>
+                                          <p className="pl-7 pt-2 text-gray-600">Firstly i start with server.In sever side i use a node js application framework named Express JS for dynamically create backend api and use mongodb to store data. In client side i use react ,react router dom.Use Axios for fetching data from mongodb.use Firebase for authentication.ii use a css tailwind css framework ,daisyUi and flowbite fir styling.use sweetalert and hit toast to show notification and many more.If you want to know about my website then explore it.</p>
+                                    </div>
+                              </div>
                         </div>
                   </div>
             </div>

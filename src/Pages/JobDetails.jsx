@@ -211,7 +211,8 @@ const JobDetails = () => {
                                           </button>
 
                                           {/* Modal part */}
-                                          <dialog id="apply-modal" className="modal">
+
+                                          {/* <dialog id="apply-modal" className="modal">
                                                 <div className="modal-box w-11/12 max-w-5xl">
 
 
@@ -246,14 +247,14 @@ const JobDetails = () => {
 
                                                             </form>
                                                       </div>
-git 
+                                                     
                                                       <div className="modal-action">
                                                             <form method="dialog">
                                                                   <button className="btn">Close</button>
                                                             </form>
                                                       </div>
                                                 </div>
-                                          </dialog>
+                                          </dialog> */}
 
 
                                     </div>

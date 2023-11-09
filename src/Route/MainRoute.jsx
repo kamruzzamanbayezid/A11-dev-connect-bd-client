@@ -47,8 +47,7 @@ const router = createBrowserRouter([
                   {
                         path: 'updateJobs/:id',
                         element: <UpdateJobs></UpdateJobs>,
-                        // loader: ({ params }) => fetch(`https://dev-connect-bd-server.vercel.app/api/v1/allJobs/singleJobs/${params.id}`)
-                        loader: ({ params }) => fetch(`http://localhost:5000/api/v1/allJobs/singleJobs/${params.id}`)
+                        loader: ({ params }) => fetch(`https://dev-connect-bd-server.vercel.app/api/v1/allJobs/singleJobs/${params.id}`)
                   },
                   {
                         path: 'appliedJobs',
@@ -58,7 +57,7 @@ const router = createBrowserRouter([
                         path: 'login',
                         element: <LoginPage></LoginPage>
                   },
-                  { 
+                  {
                         path: 'blogs',
                         element: <Blog></Blog>
                   }

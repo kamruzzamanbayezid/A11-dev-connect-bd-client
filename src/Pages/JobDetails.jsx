@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import useAxios from "../Hooks/useAxios";
 import { CiLocationOn } from "react-icons/ci";
 import toast from "react-hot-toast";
 import useAuth from "../Hooks/useAuth";
 import Swal from "sweetalert2";
+import emailjs from '@emailjs/browser';
 
 
 const JobDetails = () => {
@@ -43,9 +44,8 @@ const JobDetails = () => {
                   const userEmail = user.email;
                   axios.get(`/user/appliedJobs?loggedEmail=${userEmail}`)
                         .then((data) => {
-                              console.log('applied jobs', data.data);
                               const appliedJobs = data.data;
-                              const jobIds = appliedJobs.map((job) => console.log(job._id));
+                              const jobIds = appliedJobs.map((job) => job._id);
                               if (jobIds.includes(id)) {
                                     setHasApplied(true);
                               }
@@ -90,6 +90,14 @@ const JobDetails = () => {
                   deadline,
             };
 
+            // Email JS
+            emailjs.sendForm('service_52fqm6r', 'template_e1r5vw4', e.target, 'wgQs1--JnuWotNl2C')
+                  .then((result) => {
+                        console.log(result);
+                  }, (error) => {
+                        console.log(error.text);
+                  });
+
 
             // apply for a job
             axios.post('/user/appliedJobs', formData)
@@ -100,7 +108,6 @@ const JobDetails = () => {
                               axios
                                     .put(`/allJobs/singleJobs/${id}`, { applicantsNumber: applicantsNumber + 1 })
                                     .then((data) => {
-                                          console.log(data);
                                           if (data.status === 200) {
                                                 Swal.fire({
                                                       title: "Good job!",
@@ -118,7 +125,6 @@ const JobDetails = () => {
                                           toast.error(error.message);
                                     });
 
-                              // window.location.reload()
                         }
                         else {
                               toast.error('You Already Apply for this job')
@@ -127,8 +133,6 @@ const JobDetails = () => {
                   .catch(error => {
                         toast.error(error.message)
                   })
-
-            // update applicants number
 
       };
 
@@ -220,21 +224,21 @@ const JobDetails = () => {
                                                                         <input
                                                                               value={loggedUser}
                                                                               onChange={(e) => setLoggedUser(e.target.value)}
-                                                                              type="text" name="name" id="user_name" className="bg-gray-50 border border-gray-300 placeholder:text-base text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-2.5 py-4 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="name@company.com" required />
+                                                                              type="text" name="user_name" id="user_name" className="bg-gray-50 border border-gray-300 placeholder:text-base text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-2.5 py-4 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="name@company.com" required />
                                                                   </div>
                                                                   <div>
                                                                         <label htmlFor="user_email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your Email</label>
                                                                         <input
                                                                               value={loggedEmail}
                                                                               onChange={(e) => setLoggedEmail(e.target.value)}
-                                                                              type="email" name="email" id="user_email" className="bg-gray-50 placeholder:text-base border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-2.5 py-4 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required />
+                                                                              type="email" name="user_email" id="user_email" className="bg-gray-50 placeholder:text-base border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-2.5 py-4 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required />
                                                                   </div>
                                                                   <div>
                                                                         <label htmlFor="resumeLink" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Resume Link</label>
                                                                         <input
                                                                               value={resumeLink}
                                                                               onChange={(e) => setResumeLink(e.target.value)}
-                                                                              type="text" name="resumeLink" id="resumeLink" className="bg-gray-50 border border-gray-300 placeholder:text-base text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-2.5 py-4 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Enter the URL of your resume" required />
+                                                                              type="text" name="resume_Link" id="resumeLink" className="bg-gray-50 border border-gray-300 placeholder:text-base text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-2.5 py-4 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="Enter the URL of your resume" required />
                                                                   </div>
 
 
@@ -242,8 +246,6 @@ const JobDetails = () => {
 
                                                             </form>
                                                       </div>
-
-
 
                                                       <div className="modal-action">
                                                             <form method="dialog">

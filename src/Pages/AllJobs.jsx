@@ -115,15 +115,10 @@ const AllJobs = () => {
                                                       <p className=' text-[#AAB1B7] mr-3 mt-1'>Deadline: {job?.deadline}</p>
                                                 </div>
 
-                                                {/* { */}
-                                                {/* // user ? */}
-
                                                 <Link to={`/jobDetails/${job._id}`}>
                                                       <button className=" text-[#D2F34C] bg-[#244034] px-8 py-2 rounded hover:bg-transparent hover:border hover:border-[#244034] hover:text-[#244034] text-xl font-medium ">View Details</button>
                                                 </Link>
 
-                                                {/* <button onClick={handleNavigate} className=" text-[#D2F34C] bg-[#244034] px-8 py-2 rounded hover:bg-transparent hover:border hover:border-[#244034] hover:text-[#244034] text-xl font-medium ">View Details</button> */}
-                                                {/* // } */}
                                           </div>
                                     </div>
                               ))

@@ -1,10 +1,18 @@
+import { Helmet } from "react-helmet-async";
 import Banner from "./Banner";
 import ContactUs from "./ContactUs";
 import JobByCategory from "./JobByCategory/JobByCategory";
+import WhyDevConnect from "./WhyDevConnect";
 
 const Home = () => {
       return (
             <div className="bg-[#F5F7FA]">
+
+                  {/* dinamic title */}
+                  <Helmet>
+                        <title>DevConnect.BD | HOME</title>
+                  </Helmet>
+
                   <Banner />
 
                   {/* job by category */}
@@ -15,6 +23,9 @@ const Home = () => {
 
                   {/* contact us */}
                   <ContactUs></ContactUs>
+
+                  {/* why dev connect bd */}
+                  <WhyDevConnect></WhyDevConnect>
             </div>
       );
 };

@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import { GoogleAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import auth from "../congiq/firebase.config";
+import useAxios from "../Hooks/useAxios";
 
 export const AuthContent = createContext();
 const googleProvider = new GoogleAuthProvider();
@@ -12,6 +13,7 @@ const AuthProvider = ({ children }) => {
 
       const [user, setUser] = useState({});
       const [isLoading, setIsLoading] = useState(true);
+      const axios = useAxios();
 
       // Google login
       const googleLogin = () => {
@@ -49,13 +51,29 @@ const AuthProvider = ({ children }) => {
       // informer
       useEffect(() => {
             const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
+                  const loggedUser = { email: currentUser?.email || user?.email }
                   setUser(currentUser);
-                  setIsLoading(false)
+                  setIsLoading(false);
+
+                  // jwt
+                  if (currentUser) {
+                        axios.post('/auth/jwt', loggedUser, { withCredentials: true })
+                              .then(res => {
+                                    console.log('user logged in', res.data);
+                              })
+                  }
+                  else {
+                        axios.post('/auth/logout', loggedUser, { withCredentials: true })
+                              .then(res => {
+                                    console.log('user logged out', res.data);
+                              })
+                  }
+
             })
             return () => {
                   return unSubscribe()
             }
-      }, []);
+      }, [axios, user?.email]);
 
       const authentications = {
             googleLogin,
